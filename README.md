@@ -29,17 +29,20 @@ Navštivte stránky [Pythonu](https://python.org/downloads) a stáhněte nejnov�
 #### Instalace Rustu
 Navštivte stránky [Rustu]() a stáhněte nejnovější stabilní verzi pro vaše zařízení.
 
-#### Zapnutí viruálního prostředí
+#### Vytvoření a zapnutí viruálního prostředí
+- Běžte do adresáře app/
+- napište "python -m venv backend-venv/ (toto vytvoří virtuální prostředí pythonu)
+- Běžte do adresáře backend-venv/bin/ a aktivujte si virtuální prostředí pomocí skriptu (na linuxu příkazem "source activate")
 
 #### Zapnutí serveru
 
 ## 2. Ovládání aplikace pomocí CLI
 Pro vývojovou verzi:
 ### Frontend
-Běžte do složky frontend a napište "npm run dev".
+Běžte do adresáře app/frontend/ a napište "npm run dev".
 ### Backend
-Běžte do složky be-venv/bin/ a aktivujte skript pro vaše zařízení.
-Poté ve složce backend/ napište "python manage.py runserver"
+Běžte do složky app/backend-venv/bin/ a aktivujte skript pro vaše zařízení.
+Poté ve složce app/backend/ napište "python manage.py runserver"
 
 ## 3. Frontend
 
