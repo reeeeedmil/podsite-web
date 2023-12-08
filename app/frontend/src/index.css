@@ -1,0 +1,17 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: ibm;
+  src: url("assets/3270NerdFont-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: skyhook;
+  src: url("assets/SkyhookMono.ttf") format("truetype");
+}
+@font-face {
+  font-family: unibody8;
+  src: url("assets/Unibody8.ttf") format("truetype");
+}
