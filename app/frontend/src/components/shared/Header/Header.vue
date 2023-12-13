@@ -1,8 +1,11 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { onMounted, ref } from 'vue';
-const isOpened = ref(false)
+
 import Burger from '@c/ui/Burger/Burger.vue';
+
+
+const isOpened = ref(false)
 onMounted (() => {
   document.getElementById('burger-menu').classList.add('hidden')
 })
@@ -18,16 +21,20 @@ onMounted (() => {
       </div>
 
       <router-link to="/profile" class="text-3xl text-smoky flex  justify-center items-center w-1/6 text-center">
-        Profile
+        {{ $t('profile') }}
       </router-link>
 
       <router-link to="/subnet-calculator" class="text-3xl text-smoky  flex justify-center items-center w-1/3 text-center">
-        Subnet calculator
+        {{ $t('subnetCalculator') }}
       </router-link>
 
       <router-link to="/network-visualizer" class="text-3xl text-smoky  flex justify-center items-center w-1/3 text-center">
-        Network visualizer
+        {{ $t('networkVisualizer') }}
       </router-link>
+
+      <button id="locale" class="w-1/12 bg-rufous">
+        <img />
+      </button>
     </nav>
     <nav class='flex md:hidden bg-vanilla-base w-full h-full justify-between'>
 
@@ -35,7 +42,13 @@ onMounted (() => {
         <router-link to="/" class="text-3xl text-smoky  flex justify-center items-center w-full text-center">
           subNet
         </router-link>
+
       </div>
+      <div class="w-full"/>
+      <button class="w-1/5 bg-rufous h-full justify-end ">
+        text
+        <img />
+      </button>
 
       <Burger 
         @change-menu='isOpened=!isOpened'

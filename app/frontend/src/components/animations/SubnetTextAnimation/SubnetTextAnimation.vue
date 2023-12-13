@@ -5,27 +5,27 @@
   <div class="w-full text-center">
     <ul  class="list-none w-full text-center">
       <span
-        class="text-xl hook-1 pl-3"
+        class="text-xl hook-1 pl-3 text-smoky"
         >s
       </span>
       <span
-        class="text-xl hook-2 pl-3"
+        class="text-xl hook-2 pl-3 text-smoky"
         >u
       </span>
       <span
-        class="text-xl hook-3 pl-3"
+        class="text-xl hook-3 pl-3 text-smoky"
         >b
       </span>
       <span
-        class="text-xl hook-4 pl-3"
+        class="text-xl hook-4 pl-3 text-smoky"
         >N
       </span>
       <span
-        class="text-xl hook-5 pl-3"
+        class="text-xl hook-5 pl-3 text-smoky"
         >e
       </span>
       <span
-        class="text-xl hook-6 pl-3"
+        class="text-xl hook-6 pl-3 text-smoky"
         >t
       </span>
     </ul>

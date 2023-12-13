@@ -1,5 +1,19 @@
 <script setup>
 import {  RouterView } from 'vue-router'
+import { getCookie } from '@s/utils/utils.js';
+let cookie
+try {
+  cookie = getCookie('locale');
+} catch (error) {
+  document.cookie('locale=EN')
+  cookie = 'EN';
+} finally {
+  const locale = `locale=${cookie}`;
+  document.cookie = locale;
+  sessionStorage.setItem("locale", cookie);
+}
+
+
 </script>
 
 <template>

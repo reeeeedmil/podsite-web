@@ -20,7 +20,9 @@
 ### Požadavky pro backend
 - Instalace Pythonu
 - Instalace Rustu
-- Zapnutí virtuálního python prostředí
+- Vytvoření a zapnutí virtuálního python prostředí
+- Instalace Python balíčků
+- Kompilace Rust kódu
 - Zapnutí serveru
 
 #### Instalace Pythonu
@@ -34,8 +36,14 @@ Navštivte stránky [Rustu]() a stáhněte nejnovější stabilní verzi pro va�
 - napište "python -m venv backend-venv/ (toto vytvoří virtuální prostředí pythonu)
 - Běžte do adresáře backend-venv/bin/ a aktivujte si virtuální prostředí pomocí skriptu (na linuxu příkazem "source activate")
 
-#### Zapnutí serveru
+#### Instalace Python balíčků
+- Se zapntuým virtuálním prostředím napište "pip install django djangorestframework markdown django-cors-headers django-filter"
 
+#### Kompilace Rust kódu
+- Se zapnutým virtuálním prostředím běžte do app/rsnet/ a napište "maturin develop"
+
+#### Zapnutí serveru
+- Běžte do app/backend/ složky a napište "python manage.py runserver"
 ## 2. Ovládání aplikace pomocí CLI
 Pro vývojovou verzi:
 ### Frontend
