@@ -1,6 +1,16 @@
 {
-  "profile": "Profile",
-  "subnetCalculator": "Subnet Calculator",
-  "networkVisualizer": "Network visualizer",
-  "about": "idk"
+  "homeSubtitle": "An application for designing your network",
+
+  "header": {
+    "profile": "Profile",
+    "subnetCalculator": "Subnet Calculator",
+    "networkVisualizer": "Network visualizer"
+  },
+
+  "buttons": {
+    "networkVisualizer": "Network visualizer",
+    "subnetCalculator": "Subnet calculator",
+    "about": "About me and this application"
+  }
+
 }

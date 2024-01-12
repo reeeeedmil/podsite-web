@@ -1,6 +1,14 @@
 {
-  "profile": "Profil",
-  "subnetCalculator": "Kalkulačka podsítí",
-  "networkVisualizer": "Grafické podsítě",
-  "about": "idk"
+  "homeSubtitle": "Aplikace na design vašich podsítí",
+  "header": {
+    "profile": "Profil",
+    "subnetCalculator": "Kalkulačka podsítí",
+    "networkVisualizer": "Grafické podsítě"
+  },
+  "buttons": {
+    "subnetCalculator": "Kalkulačka podsítí",
+    "networkVisualizer": "Grafické zobrazení podsítě",
+    "about": "O mně a této aplikaci"
+  }
+
 }

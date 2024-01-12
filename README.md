@@ -26,10 +26,10 @@
 - Zapnutí serveru
 
 #### Instalace Pythonu
-Navštivte stránky [Pythonu](https://python.org/downloads) a stáhněte nejnovější stabilní verzi pro vaše zařízení.
+Navštivte stránky [Pythonu](https://www.python.org/downloads/) a stáhněte nejnovější stabilní verzi pro vaše zařízení.
 
 #### Instalace Rustu
-Navštivte stránky [Rustu]() a stáhněte nejnovější stabilní verzi pro vaše zařízení.
+Navštivte stránky [Rustu](https://www.rust-lang.org/tools/install) a stáhněte nejnovější stabilní verzi pro vaše zařízení.
 
 #### Vytvoření a zapnutí viruálního prostředí
 - Běžte do adresáře app/
@@ -37,7 +37,7 @@ Navštivte stránky [Rustu]() a stáhněte nejnovější stabilní verzi pro va�
 - Běžte do adresáře backend-venv/bin/ a aktivujte si virtuální prostředí pomocí skriptu (na linuxu příkazem "source activate")
 
 #### Instalace Python balíčků
-- Se zapntuým virtuálním prostředím napište "pip install django djangorestframework markdown django-cors-headers django-filter"
+- Se zapntuým virtuálním prostředím napište "pip install django djangorestframework markdown django-cors-headers django-filter maturin"
 
 #### Kompilace Rust kódu
 - Se zapnutým virtuálním prostředím běžte do app/rsnet/ a napište "maturin develop"

@@ -21,15 +21,15 @@ onMounted (() => {
       </div>
 
       <router-link to="/profile" class="text-3xl text-smoky flex  justify-center items-center w-1/6 text-center">
-        {{ $t('profile') }}
+        {{ $t('header.profile') }}
       </router-link>
 
       <router-link to="/subnet-calculator" class="text-3xl text-smoky  flex justify-center items-center w-1/3 text-center">
-        {{ $t('subnetCalculator') }}
+        {{ $t('header.subnetCalculator') }}
       </router-link>
 
       <router-link to="/network-visualizer" class="text-3xl text-smoky  flex justify-center items-center w-1/3 text-center">
-        {{ $t('networkVisualizer') }}
+        {{ $t('header.networkVisualizer') }}
       </router-link>
 
       <button id="locale" class="w-1/12 bg-rufous">
@@ -66,7 +66,7 @@ onMounted (() => {
         class="text-3xl text-smoky  flex justify-center items-center text-center md:hidden"
         :class="isOpened? 'block' : 'hidden'"
         >
-        Profile
+        {{ $t('header.profile') }}
       </router-link>
 
       <router-link 
@@ -74,7 +74,7 @@ onMounted (() => {
         class="text-3xl text-smoky  flex justify-center items-center text-center md:hidden"
         :class="isOpened? 'block' : 'hidden'"
         >
-        Subnet calculator
+        {{ $t('header.subnetCalculator') }}
       </router-link>
 
       <router-link
@@ -82,7 +82,7 @@ onMounted (() => {
         class="text-3xl text-smoky  flex justify-center items-center text-center md:hidden"
         :class="isOpened? 'block' : 'hidden'"
         >
-        Network visualizer
+        {{ $t('header.networkVisualizer') }}
       </router-link>
 
     </div>
