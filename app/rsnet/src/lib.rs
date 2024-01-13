@@ -1,8 +1,9 @@
-mod menu;
 mod calculations;
+mod menu;
+mod tests;
 
-pub use crate::menu::*;
 pub use crate::calculations::*;
+pub use crate::menu::*;
 
 use pyo3::prelude::*;
 
