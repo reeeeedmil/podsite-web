@@ -1,6 +1,6 @@
 use pyo3::prelude::*;
-use std::{collections::hash_map::DefaultHasher, hash::Hash, hash::Hasher, str::FromStr};
-
+use std::collections::HashMap;
+use std::{collections::hash_map::DefaultHasher, hash::Hash, hash::Hasher, str::FromStr, num::IntErrorKind};
 #[pyclass]
 #[derive(Clone, Copy)]
 pub struct Address {
@@ -12,6 +12,16 @@ pub struct Address {
 #[pymethods]
 impl Address {
     #[new]
+    #[pyo3(
+        text_signature=
+           r#"Address(first_byte, second_byte, third_byte, fourth_byte)
+
+Address::new() creates a new Address.
+Required inputs are
+first_byte (type of u8)
+second_byte (type of u8)
+third_byte (type of u8)
+fourth_byte (type of u8)"#)]
     pub fn new(first_byte: u8, second_byte: u8, third_byte: u8, fourth_byte: u8) -> Self {
         Address {
             first_byte,
@@ -21,7 +31,14 @@ impl Address {
         }
     }
     #[getter]
-    pub fn get(&self) -> Vec<u8> {
+    pub fn get(&self) -> Address {
+        return *self;
+    }
+    #[pyo3(
+        text_signature=
+           r#"Returns the address as a vector => [192, 168, 0, 0]"#
+           )]
+    pub fn as_vec(&self) -> Vec<u8> {
         vec![
             self.first_byte,
             self.second_byte,
@@ -41,31 +58,60 @@ pub struct Net {
 }
 #[pymethods]
 impl Net {
+    
     #[new]
+    #[pyo3(
+        text_signature=
+           r#"Net(network_address, mask)
+
+Net::new creates a new network. 
+Required inputs are
+network_address (needs to be Address type)
+mask (neets to be Address type)"#)]
     pub fn new(network_address: Address, mask: Address) -> Self {
         Net {
             network_address,
-            broadcast: broadcast(network_address, &mask),
+            broadcast: broadcast(&network_address, &mask),
 
             mask,
-            prefix: prefix(&mask),
+            prefix: prefix_from_mask(&mask),
             wildcard: wildcard(&mask),
         }
     }
-    pub fn get_network_address(&self) -> Vec<u8> {
+    #[pyo3(
+        text_signature=
+           r#"
+
+Returns network address as Address type. Add .as_vec() to get a list.
+"#)]
+    pub fn get_network_address(&self) -> Address {
         self.network_address.get()
     }
-    pub fn get_broadcast(&self) -> Vec<u8> {
+    pub fn get_broadcast(&self) -> Address {
         self.broadcast.get()
     }
-    pub fn get_mask(&self) -> Vec<u8> {
+    pub fn get_mask(&self) -> Address {
         self.mask.get()
     }
-    pub fn get_wildcard(&self) -> Vec<u8> {
+    pub fn get_wildcard(&self) -> Address {
         self.wildcard.get()
     }
     pub fn get_prefix(&self) -> u8 {
         self.prefix
+    }
+    pub fn __repr__(&self) -> String {
+        format!(r#"Network address: {}.{}.{}.{}
+Broadcast: {}.{}.{}.{}
+
+Mask: {}.{}.{}.{}
+Wildcard: {}.{}.{}.{}
+Prefix: {}"#,
+self.network_address.as_vec()[0], self.network_address.as_vec()[1], self.network_address.as_vec()[2], self.network_address.as_vec()[3],
+self.broadcast.as_vec()[0], self.broadcast.as_vec()[1], self.broadcast.as_vec()[2], self.broadcast.as_vec()[3],
+self.mask.as_vec()[0], self.mask.as_vec()[1], self.mask.as_vec()[2], self.mask.as_vec()[3],
+self.wildcard.as_vec()[0], self.wildcard.as_vec()[1], self.wildcard.as_vec()[2], self.wildcard.as_vec()[3],
+self.prefix
+)
     }
     pub fn __hash__(&self) -> u64 {
         let mut hasher = DefaultHasher::new();
@@ -77,40 +123,17 @@ impl Net {
             .hash(&mut hasher);
         hasher.finish()
     }
-    pub fn display(&self) {
-        println!(
-            "network address: {}.{}.{}.{}",
-            &self.network_address.first_byte,
-            &self.network_address.second_byte,
-            &self.network_address.third_byte,
-            &self.network_address.fourth_byte
-        );
-        println!(
-            "broadcast: {}.{}.{}.{}",
-            &self.broadcast.first_byte,
-            &self.broadcast.second_byte,
-            &self.broadcast.third_byte,
-            &self.broadcast.fourth_byte
-        );
-
-        println!(
-            "mask: {}.{}.{}.{}",
-            &self.mask.first_byte,
-            &self.mask.second_byte,
-            &self.mask.third_byte,
-            &self.mask.fourth_byte
-        );
-        println!(
-            "wildcard: {}.{}.{}.{}",
-            &self.wildcard.first_byte,
-            &self.wildcard.second_byte,
-            &self.wildcard.third_byte,
-            &self.wildcard.fourth_byte
-        );
-        println!("prefix: {}", &self.prefix);
+    pub fn as_hashmap(&self) -> HashMap<String, Vec<u8>> {
+        HashMap::from([
+            ("network_address".to_string(), self.network_address.as_vec()),
+            ("broadcast".to_string(), self.broadcast.as_vec()),
+            ("mask".to_string(), self.mask.as_vec()),
+            ("wildcard".to_string(), self.wildcard.as_vec()),
+            ("prefix".to_string(), vec![self.prefix]),
+        ])
     }
 }
-pub fn prefix(mask: &Address) -> u8 {
+pub fn prefix_from_mask(mask: &Address) -> u8 {
     let first_binary = format!("{:b}", mask.first_byte);
     let second_binary = format!("{:b}", mask.second_byte);
     let third_binary = format!("{:b}", mask.third_byte);
@@ -129,19 +152,24 @@ pub fn prefix(mask: &Address) -> u8 {
         }
     }
 }
-pub fn mask_from_prefix(prefix: u8) -> Address {
+pub fn mask_from_prefix(prefix: &mut u8) -> Address {
     // needs prefix.clone() in parameters
-    let mut prefix_for_calculation = prefix;
     let mut address_vec: Vec<u8> = vec![];
     for _ in 0..4 {
-        if prefix_for_calculation >= 8 {
+        if *prefix >= 8 {
             address_vec.push(255);
-            prefix_for_calculation -= 8;
+            *prefix -= 8;
         } else {
             let last_byte: String = format!(
-                "{:b}{}",
-                prefix_for_calculation.clone(),
-                "0".repeat(match usize::try_from(8 - prefix_for_calculation) {
+                "{}{}",
+                "1".repeat(match usize::try_from(*prefix) {
+                    Ok(num) => num,
+                    Err(err) => {
+                        println!("{err}");
+                        0
+                    }
+                }),
+                "0".repeat(match usize::try_from(8 - *prefix) {
                     Ok(num) => num,
                     Err(err) => {
                         println!("{err}");
@@ -171,7 +199,7 @@ pub fn mask_from_prefix(prefix: u8) -> Address {
     };
 }
 
-pub fn broadcast(network_address: Address, mask: &Address) -> Address {
+pub fn broadcast(network_address: &Address, mask: &Address) -> Address {
     let first_byte = (network_address.first_byte) | (!mask.first_byte);
     let second_byte = (network_address.second_byte) | (!mask.second_byte);
     let third_byte = (network_address.third_byte) | (!mask.third_byte);
@@ -209,4 +237,63 @@ pub fn normalize_number(input: &mut u32) {
             }
         },
     )
+}
+pub fn hosts_to_mask(hosts: u32) -> Address {
+    let mut prefix: u8 = 32 - u8::try_from((format!("{:b}", hosts-1)).len()).unwrap();
+    return mask_from_prefix(&mut prefix);
+}
+fn next_address(addr: &Address) -> Address {
+    let first_byte: (u8, u8);
+    let second_byte: (u8, u8);
+    let third_byte: (u8, u8);
+    let fourth_byte: (u8, u8) = match addr.fourth_byte.checked_add(1) {
+        Some(num) => (num, 0),
+        _ => (0, 1),
+    };
+    third_byte = match addr.third_byte.checked_add(fourth_byte.1) {
+        Some(num) => (num, 0),
+        _ => (0, 1),
+    };
+    second_byte = match addr.second_byte.checked_add(third_byte.1) {
+        Some(num) => (num, 0),
+        _ => (0, 1),
+    };
+    first_byte = match addr.first_byte.checked_add(second_byte.1) {
+        Some(num) => (num, 0),
+        _ => (0, 1),
+    };
+    Address { first_byte: first_byte.0, second_byte: second_byte.0, third_byte: third_byte.0, fourth_byte: fourth_byte.0 }
+}
+#[pyfunction]
+pub fn scaffold_hosts(base_network: &Net, mut hosts_vec: Vec<u32>) -> Vec<Net> {
+    let mut networks: Vec<Net> = vec![];
+    hosts_vec.sort();
+    hosts_vec.reverse();
+    networks.push(Net::new(
+        base_network.get_network_address(),
+        hosts_to_mask(hosts_vec[0]),
+    ));
+    for index in 1..hosts_vec.len() {
+        let mask = hosts_to_mask(hosts_vec[index]);
+        let net_address = next_address(&networks[index-1].get_broadcast());
+        let net: Net = Net::new(net_address, mask);
+        networks.push(net);
+    }
+    return networks;
+}
+#[pyfunction]
+pub fn scaffold_prefixes(base_network: &Net, mut prefixes_vec: Vec<u8>) -> Vec<Net> {
+    let mut networks: Vec<Net> = vec![];
+    prefixes_vec.sort();
+    networks.push(Net::new(
+        base_network.get_network_address(),
+        mask_from_prefix(&mut prefixes_vec[0]),
+    ));
+    for index in 1..prefixes_vec.len() {
+        let mask = mask_from_prefix(&mut prefixes_vec[index]);
+        let net_address = next_address(&networks[index-1].get_broadcast());
+        let net: Net = Net::new(net_address, mask);
+        networks.push(net);
+    }
+    return networks;
 }

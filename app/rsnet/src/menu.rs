@@ -52,7 +52,7 @@ fn main_menu() {
 
             // print base net
             3 => match base_net {
-                Some(_) => (&base_net.as_ref().unwrap()).display(),
+                Some(_) => println!("{}", &base_net.as_ref().unwrap().__repr__()),
                 None => println!("base net not initialized"),
             },
 
@@ -124,7 +124,7 @@ fn create_base_net() -> Net {
                 let mut input: String = String::new();
                 std::io::stdin().read_line(&mut input).expect("error");
                 break match input.trim().parse::<u8>() {
-                    Ok(num) => mask_from_prefix(num),
+                    Ok(mut num) => mask_from_prefix(&mut num),
                     Err(error) => {
                         println!("{error}");
                         continue;
@@ -135,7 +135,7 @@ fn create_base_net() -> Net {
     };
     println!("ahoj");
     let net = Net::new(base_address, mask);
-    net.display();
+    net.__repr__();
     net
 }
 fn create_address() -> Address {
