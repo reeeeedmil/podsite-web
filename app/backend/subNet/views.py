@@ -8,9 +8,10 @@ from rest_framework.response import Response
 from .serializers import NetSerializer, UserSerializer
 
 import subNet.calculations as calculations
-
+import rsnet as net
 import subNet.messages as messages
 # Create your views here.
+
 
 class NetViewerViewSet(viewsets.ViewSet):
     def retrieve(self, request, pk=0):
@@ -28,11 +29,10 @@ class NetViewSet(viewsets.ViewSet):
         serialized_children = NetSerializer(children, many=True)
 
         response = {
-                'parent': serialized_parent.data,
-                'children': serialized_children.data,
-                }
+            'parent': serialized_parent.data,
+            'children': serialized_children.data,
+        }
         return Response(response)
-
 
     def create(self, request):
         def handle_error(errors):
@@ -44,7 +44,7 @@ class NetViewSet(viewsets.ViewSet):
         error = []
 
         match prefix_over_mask:
-            case ('True' |'true' |'TRUE'):
+            case ('True' | 'true' | 'TRUE'):
                 prefix_over_mask = True
             case ('False' | 'false' | 'FALSE'):
                 prefix_over_mask = False
@@ -60,7 +60,7 @@ class NetViewSet(viewsets.ViewSet):
                     error.append(messages.errors.get("NET_OUT_OF_RANGE"))
                     handle_error(error)
 
-        except:
+        except Exception:
             error.append(messages.errors.get("NET_UNEXPECTED_CHARS"))
             handle_error(error)
 
@@ -83,7 +83,6 @@ class NetViewSet(viewsets.ViewSet):
         wildcard = calculations.wildcard_calculation(mask)
         broadcast = calculations.broadcast_calculation(network_address, mask)
 
-
         network = calculations.IPv4Network()
 
         network.update_network_address(network_address)
@@ -92,9 +91,9 @@ class NetViewSet(viewsets.ViewSet):
         network.update_wildcard(wildcard)
         network.update_broadcast(broadcast)
         if len(error) == 0:
-            return Response({"Network address":network.network_address,
+            return Response({"Network address": network.network_address,
                             "mask": network.mask,
-                            "wildcard": network.wildcard,
-                            "broadcast": network.broadcast,
-                            "prefix": network.prefix,
-                            })
+                             "wildcard": network.wildcard,
+                             "broadcast": network.broadcast,
+                             "prefix": network.prefix,
+                             })

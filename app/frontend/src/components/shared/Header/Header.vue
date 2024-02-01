@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { onMounted, ref } from 'vue';
+import LanguageButton from '../../ui/Button/LanguageButton.vue';
 
 import Burger from '@c/ui/Burger/Burger.vue';
 
@@ -20,10 +21,6 @@ onMounted (() => {
         </router-link>
       </div>
 
-      <router-link to="/profile" class="text-3xl text-smoky flex  justify-center items-center w-1/6 text-center">
-        {{ $t('header.profile') }}
-      </router-link>
-
       <router-link to="/subnet-calculator" class="text-3xl text-smoky  flex justify-center items-center w-1/3 text-center">
         {{ $t('header.subnetCalculator') }}
       </router-link>
@@ -32,9 +29,7 @@ onMounted (() => {
         {{ $t('header.networkVisualizer') }}
       </router-link>
 
-      <button id="locale" class="w-1/12 bg-rufous">
-        <img />
-      </button>
+      <LanguageButton />
     </nav>
     <nav class='flex md:hidden bg-vanilla-base w-full h-full justify-between'>
 
@@ -45,31 +40,19 @@ onMounted (() => {
 
       </div>
       <div class="w-full"/>
-      <button class="w-1/5 bg-rufous h-full justify-end ">
-        text
-        <img />
-      </button>
 
-      <Burger 
+      <Burger
         @change-menu='isOpened=!isOpened'
         :class="'md:hidden'"
         />
     </nav>
-    <div 
+    <div
       id="burger-menu"
-      class="bg-vanilla-base w-screen md:hidden max-md:h-28 max-sm:h-32 max-[440px]:h-44" 
+      class="bg-vanilla-base w-screen md:hidden max-md:h-28 max-sm:h-32 max-[440px]:h-44"
       :class="isOpened? 'burger-menu-show' : 'burger-menu-hide'"
       >
 
       <router-link
-        to="/profile" 
-        class="text-3xl text-smoky  flex justify-center items-center text-center md:hidden"
-        :class="isOpened? 'block' : 'hidden'"
-        >
-        {{ $t('header.profile') }}
-      </router-link>
-
-      <router-link 
         to="/subnet-calculator"
         class="text-3xl text-smoky  flex justify-center items-center text-center md:hidden"
         :class="isOpened? 'block' : 'hidden'"
@@ -84,6 +67,9 @@ onMounted (() => {
         >
         {{ $t('header.networkVisualizer') }}
       </router-link>
+      <div class="pr-5 flex justify-center">
+        <LanguageButton />
+      </div>
 
     </div>
 
@@ -97,7 +83,7 @@ onMounted (() => {
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
- 
+
 @keyframes fadeInAnimation {
     0% {
         opacity: 0;
@@ -114,7 +100,7 @@ onMounted (() => {
     animation-fill-mode: forwards;
     animation-direction: reverse;
 }
- 
+
 @keyframes fadeOutAnimation {
     100% {
         opacity: 1;

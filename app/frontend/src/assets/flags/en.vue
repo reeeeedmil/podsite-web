@@ -1,3 +1,4 @@
+<template>
 <svg xmlns="http://www.w3.org/2000/svg" id="flag-icons-gb" viewBox="0 0 640 480">
   <path fill="#012169" d="M0 0h640v480H0z"/>
   <path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0z"/>
@@ -5,3 +6,4 @@
   <path fill="#FFF" d="M241 0v480h160V0zM0 160v160h640V160z"/>
   <path fill="#C8102E" d="M0 193v96h640v-96zM273 0v480h96V0z"/>
 </svg>
+</template>
