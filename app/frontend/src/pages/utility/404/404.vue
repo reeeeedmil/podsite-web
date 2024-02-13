@@ -4,5 +4,5 @@
 </script>
 
 <template>
-    <Header />
+  <Header />
 </template>

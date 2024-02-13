@@ -4,11 +4,13 @@ const isOpened = ref(false)
 </script>
 
 <template>
-
-  <div class="menu-btn" :class="isOpened? 'open' : ''" @click="isOpened = !isOpened; $emit('changeMenu')">
-    <div class="menu-btn__burger"></div>
+  <div
+    class="menu-btn"
+    :class="isOpened? 'open' : ''"
+    @click="isOpened = !isOpened; $emit('changeMenu')"
+  >
+    <div class="menu-btn__burger" />
   </div>
-
 </template>
 
 <style scoped>

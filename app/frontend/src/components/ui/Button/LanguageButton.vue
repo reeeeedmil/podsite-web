@@ -14,8 +14,11 @@
 </script>
 
 <template>
-  <button class="content-center w-12" @click="changeLanguage">
-    <cz v-if="locale == 'CS'"/>
+  <button
+    class="content-center w-12"
+    @click="changeLanguage"
+  >
+    <cz v-if="locale == 'CS'" />
     <en v-else />
   </button>
 </template>

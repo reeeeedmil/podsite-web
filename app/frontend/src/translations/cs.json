@@ -8,7 +8,16 @@
   "buttons": {
     "subnetCalculator": "Kalkulačka podsítí",
     "networkVisualizer": "Grafické zobrazení podsítí",
-    "about": "O mně a této aplikaci"
+    "about": "O mně a této aplikaci",
+    "postPrefixes": "Vypočítej podsítě",
+    "postHosts": "Vypočítej podsítě",
+    "calculator": {"prefixes": "Výpočet podsítí pomocí prefixů", "hosts": "Výpočet podsítí pomocí počtu hostů"}
+  },
+  "input": {
+    "baseAddress": "Základní adresa sítě:",
+    "mask": "Maska:",
+    "prefix": "Prefixy:",
+    "parsedPrefixes": "Zpracované prefixy:"
   }
 
 }

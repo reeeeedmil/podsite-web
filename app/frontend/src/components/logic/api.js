@@ -1,10 +1,9 @@
 // API pro prihlasovani registraci a pod
 
+const baseUrl = `http://localhost:8000`
 
 async function api(apiType = '', firstItem, secondItem) {
-    const baseUrl = `http://localhost:8000`
     let response
-    let data
 
     switch (apiType) {
         case "getToken":
@@ -57,6 +56,51 @@ async function api(apiType = '', firstItem, secondItem) {
         default:
             return `${baseUrl}`
     }
+}
+export function getUrl(apiType="") {
+  switch (apiType) {
+    case "postPrefixes" | "prefixes":
+      return `${baseUrl}/api/prefix/`
+    case "postHosts" | "hosts":
+      return `${baseUrl}/api/hosts/`
+    default:
+      return `${baseUrl}`
+    }
+  }
+export async function postApi(type='', inputData) {
+  let response
+  console.log(JSON.stringify(inputData))
+  switch (type) {
+    case "prefixes":
+        try {
+            response = await fetch(`${baseUrl}/api/prefixes/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(inputData),
+            });
+            return response.json();
+        } catch (error) {
+            console.error("Error posting subnets: ", error);
+            throw error;
+        }
+
+    case "hosts":
+        try {
+            response = await fetch(`${baseUrl}/api/hosts/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(inputData),
+            });
+            return response.json();
+        } catch (error) {
+            console.error("Error posting subnets: ", error);
+            throw error;
+        }
+  }
 }
 
 export default api

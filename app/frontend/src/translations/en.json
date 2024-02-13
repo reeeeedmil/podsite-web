@@ -10,7 +10,16 @@
   "buttons": {
     "networkVisualizer": "Network visualizer",
     "subnetCalculator": "Subnet calculator",
-    "about": "About me and this application"
+    "about": "About me and this application",
+    "postPrefixes": "Calculate subnets",
+    "postHosts": "Calculate subnets",
+    "calculator": {"prefixes": "Calculate subnets using prefixes", "hosts": "Calculate subnets using number of hosts"}
+  },
+  "input": {
+    "baseAddress": "Base network address:",
+    "mask": "Mask::",
+    "prefix": "Prefixes:",
+    "parsedPrefixes": "Parsed prefixes:"
   }
 
 }

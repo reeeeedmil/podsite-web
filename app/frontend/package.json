@@ -13,6 +13,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "eslint-plugin-vue": "^9.21.1",
+    "oxlint": "^0.2.8",
     "vue": "^3.3.4",
     "vue-i18n": "^9.8.0",
     "vue-router": "^4.2.5"
@@ -25,9 +27,8 @@
     "@vue/test-utils": "^2.4.1",
     "autoprefixer": "^10.4.16",
     "cypress": "^13.3.1",
-    "eslint": "^8.49.0",
+    "eslint": "^8.56.0",
     "eslint-plugin-cypress": "^2.15.1",
-    "eslint-plugin-vue": "^9.17.0",
     "jsdom": "^22.1.0",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",

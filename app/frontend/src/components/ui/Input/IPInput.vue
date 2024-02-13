@@ -15,42 +15,42 @@
 <template>
   <div
     class="flex flex-row"
-    >
+  >
     <input
-      class="text-smoky address-input w-16 sm:w-24 md:w-32"
       v-model="bytes[0]"
+      class="text-smoky address-input w-16 sm:w-24 md:w-32"
       type="number"
       min="0"
       max="255"
       @input="bytes[0] = checkByte(bytes[0]); $emit('addressChange', bytes);"
-      >
-      <p>.</p>
+    >
+    <p>.</p>
     <input
-      class="text-smoky address-input w-16 sm:w-24 md:w-32"
       v-model="bytes[1]"
+      class="text-smoky address-input w-16 sm:w-24 md:w-32"
       type="number"
       min="0"
       max="255"
       @input="bytes[1] = checkByte(bytes[1]); $emit('addressChange', bytes);"
-      >
-      <p>.</p>
+    >
+    <p>.</p>
     <input
-      class="text-smoky address-input w-16 sm:w-24 md:w-32"
       v-model="bytes[2]"
+      class="text-smoky address-input w-16 sm:w-24 md:w-32"
       type="number"
       min="0"
       max="255"
       @input="bytes[2] = checkByte(bytes[2]); $emit('addressChange', bytes);"
-      >
-      <p>.</p>
+    >
+    <p>.</p>
     <input
-      class="text-smoky address-input w-16 sm:w-24 md:w-32"
       v-model="bytes[3]"
+      class="text-smoky address-input w-16 sm:w-24 md:w-32"
       type="number"
       min="0"
       max="255"
       @input="bytes[3] = checkByte(bytes[3]); $emit('addressChange', bytes);"
-      >
+    >
   </div>
 </template>
 

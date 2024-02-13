@@ -8,7 +8,7 @@ if ([null, "null", undefined, "undefined"].includes(lang)) {
 </script>
 
 <template>
-  <div class='min-h-screen w-screen bg-nyanza flex flex-col'>
+  <div class="min-h-screen w-screen bg-nyanza flex flex-col">
     <RouterView />
   </div>
 </template>

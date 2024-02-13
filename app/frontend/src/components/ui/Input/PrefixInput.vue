@@ -18,9 +18,14 @@
 </script>
 
 <template>
-    <input
-      class="text-smoky address-input md:w-1/2"
-      v-model="prefixesInput"
-      @input="prefixes = handleInput(prefixesInput); $emit('prefixesChange', prefixes)"
-      >
+  <input
+    v-model="prefixesInput"
+    class="text-smoky address-input md:w-1/2"
+    @input="prefixes = handleInput(prefixesInput); $emit('prefixesChange', prefixes)"
+  >
 </template>
+<style scoped>
+  .address-input:focus {
+    background-color: rgb(213, 228, 195);
+  }
+</style>

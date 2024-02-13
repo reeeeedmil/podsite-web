@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "plugin:vue/vue3-recommended",
+    "eslint:recommended"
+  ],
+  "rules": {
+    "eqeqeq": "off",
+    "vue/multi-word-component-names": 0,
+    "vue/this-in-template": 0
+  }
+}
