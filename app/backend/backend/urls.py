@@ -19,19 +19,15 @@ from django.urls import include, path
 
 from rest_framework import routers
 
-from subNet import views, user_views
+from subNet import views
 
-from subNet.user_views import CustomAuthToken
 router = routers.DefaultRouter()
 
 router.register(r'net-viewer', views.NetViewerViewSet, basename='net-viewer')
 router.register(r'net', views.NetViewSet, basename='net')
-router.register(r'user', user_views.UserViewSet, basename='user')
-
-router.register(r'confirm-auth', user_views.ConfirmAuth, basename='confirm-auth')
+router.register(r'prefixes', views.PrefixPost, basename='prefix-post')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api-auth/', CustomAuthToken.as_view()),
 ]

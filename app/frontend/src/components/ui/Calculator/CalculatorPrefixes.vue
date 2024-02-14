@@ -1,5 +1,5 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, nextTick } from 'vue';
   import IPInput from '@c/ui/Input/IPInput.vue';
   import MaskInput from '@c/ui/Input/MaskInput.vue';
   import PrefixInput from '@c/ui/Input/PrefixInput.vue';
@@ -7,6 +7,7 @@
   const baseAddress = ref()
   const mask = ref()
   const prefixes = ref()
+  const calculated = ref()
 </script>
 
 <template>
@@ -51,11 +52,19 @@
     </div>
 
     <SubmitButton
-      :type="'hosts'"
+      :type="'prefixes'"
       :base-address="baseAddress"
       :mask="mask"
       :input="prefixes"
+      @response="(response) => calculated = response"
     />
+    <p
+      :class="calculated ? '' : 'hidden'"
+      class="text-smoky h-96"
+      >
+      {{ calculated }}
+    </p>
+
   </main>
 </template>
 

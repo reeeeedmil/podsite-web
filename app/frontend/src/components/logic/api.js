@@ -69,7 +69,6 @@ export function getUrl(apiType="") {
   }
 export async function postApi(type='', inputData) {
   let response
-  console.log(JSON.stringify(inputData))
   switch (type) {
     case "prefixes":
         try {

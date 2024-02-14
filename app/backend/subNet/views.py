@@ -7,8 +7,7 @@ from rest_framework.response import Response
 
 from .serializers import NetSerializer, UserSerializer
 
-import subNet.calculations as calculations
-import rsnet as net
+import rsnet
 import subNet.messages as messages
 # Create your views here.
 
@@ -97,3 +96,60 @@ class NetViewSet(viewsets.ViewSet):
                              "broadcast": network.broadcast,
                              "prefix": network.prefix,
                              })
+
+
+class PrefixPost(viewsets.ViewSet):
+    def create(self, request, pk=0):
+        base_address = request.data.get("baseAddress")
+        mask = request.data.get("mask")
+        base_address = rsnet.Address(
+            base_address[0], base_address[1], base_address[2], base_address[3])
+        mask = rsnet.Address(
+            mask[0], mask[1], mask[2], mask[3])
+        base_net = rsnet.Net(base_address, mask)
+        nets = rsnet.scaffold_prefixes(base_net, request.data.get("prefixes"))
+        child = Net(
+            network_address=".".join(
+                str(netbyte) for netbyte in base_net.get_network_address().as_vec()),
+            mask=".".join(
+                str(netbyte) for netbyte in base_net.get_mask().as_vec()),
+            broadcast=".".join(
+                str(netbyte) for netbyte in base_net.get_broadcast().as_vec()),
+            wildcard=".".join(
+                str(netbyte) for netbyte in base_net.get_wildcard().as_vec()),
+            prefix=base_net.get_prefix(),
+        )
+        child.save()
+        response = {
+            0: {
+                "networkAddress": child.network_address,
+                "broadcast": child.broadcast,
+                "mask": child.mask,
+                "wildcard": child.wildcard,
+                "prefix": child.prefix
+            }
+        }
+        iterator = 1
+        for net in nets:
+            child = Net(
+                parent=child,
+                network_address=".".join(
+                    str(netbyte) for netbyte in net.get_network_address().as_vec()),
+                mask=".".join(
+                    str(netbyte) for netbyte in net.get_mask().as_vec()),
+                broadcast=".".join(
+                    str(netbyte) for netbyte in net.get_broadcast().as_vec()),
+                wildcard=".".join(
+                    str(netbyte) for netbyte in net.get_wildcard().as_vec()),
+                prefix=net.get_prefix(),
+            )
+            response[iterator] = {
+                "networkAddress": child.network_address,
+                "broadcast": child.broadcast,
+                "mask": child.mask,
+                "wildcard": child.wildcard,
+                "prefix": child.prefix
+            }
+            child.save()
+            iterator += 1
+        return Response(response)

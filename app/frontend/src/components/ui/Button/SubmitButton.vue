@@ -1,4 +1,5 @@
 <script setup>
+  import { ref } from 'vue';
   import { postApi } from "@c/logic/api.js";
   const props = defineProps({
     type: String,
@@ -6,7 +7,7 @@
     mask: Array,
     input: Array,
   })
-
+const response = ref()
 function createData() {
 let data = new Object;
   data.baseAddress = props.baseAddress
@@ -16,6 +17,12 @@ let data = new Object;
     } else {
       data.hosts = props.input
       }
+  if (data.baseAddress == undefined) {
+    data.baseAddress = [0, 0, 0, 0]
+  }
+  if (data.mask == undefined) {
+    data.mask = [0, 0, 0, 0]
+  }
   return data
   }
 </script>
@@ -24,14 +31,14 @@ let data = new Object;
   <button
     v-if="props.type == 'prefixes'"
     class="p-1 outline-black submit-button rounded-lg h-20 w-full text-center text-3xl md:text-4xl"
-    @click="postApi('prefixes', createData())"
+    @click="postApi('prefixes', createData()).then((data) => {$emit('response', data)});"
   >
     {{ $t('buttons.postPrefixes') }}
   </button>
   <button
     v-if="props.type == 'hosts'"
     class="p-1 outline-black submit-button rounded-lg h-20 w-full text-center text-3xl md:text-4xl"
-    @click="postApi('hosts', createData())"
+    @click="postApi('hosts', createData()).then((data) => {$emit('response', data)});"
   >
     {{ $t('buttons.postHosts') }}
   </button>
