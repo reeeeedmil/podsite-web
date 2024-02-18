@@ -2,7 +2,7 @@
 
 const baseUrl = `http://localhost:8000`
 
-async function api(apiType = '', firstItem, secondItem) {
+export async function api(apiType = '', firstItem, secondItem) {
     let response
 
     switch (apiType) {
@@ -39,9 +39,9 @@ async function api(apiType = '', firstItem, secondItem) {
                 throw error;
             }
 
-        case "getUser":
+        case "getNets":
             try {
-                response = await fetch(`${baseUrl}/api/user/${firstItem}`, {
+                response = await fetch(`${baseUrl}/api/net/${firstItem}`, {
                     method: "GET",
                     credentials: "include",
                     headers: {
@@ -57,12 +57,14 @@ async function api(apiType = '', firstItem, secondItem) {
             return `${baseUrl}`
     }
 }
-export function getUrl(apiType="") {
+export function getUrl(apiType="", id=0) {
   switch (apiType) {
-    case "postPrefixes" | "prefixes":
-      return `${baseUrl}/api/prefix/`
-    case "postHosts" | "hosts":
-      return `${baseUrl}/api/hosts/`
+    case "prefixes":
+      return `/api/prefix/`
+    case "hosts":
+      return `/api/hosts/`
+    case "getNets":
+      return `/api/net/${id}`
     default:
       return `${baseUrl}`
     }
@@ -75,8 +77,7 @@ export async function postApi(type='', inputData) {
             response = await fetch(`${baseUrl}/api/prefixes/`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
-                },
+                    "Content-Type": "application/json" },
                 body: JSON.stringify(inputData),
             });
             return response.json();
@@ -101,5 +102,3 @@ export async function postApi(type='', inputData) {
         }
   }
 }
-
-export default api

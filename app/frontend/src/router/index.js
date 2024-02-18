@@ -4,6 +4,7 @@ import PageNotFound from '@p/utility/404/404.vue';
 import About from '@p/About/About.vue';
 import Calculator from '@p/Calculator/Calculator.vue';
 import CalculatorPrefixes from '@p/Calculator/CalculatorPrefixes.vue';
+import CalculatorViewResults from '@p/Calculator/CalculatorViewResults.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -18,6 +19,11 @@ const router = createRouter({
     {
       path: '/subnet-calculator/prefixes',
       component: CalculatorPrefixes,
+    },
+    {
+      name: 'nets',
+      path: '/subnet-calculator/net/:id',
+      component: CalculatorViewResults,
     },
     {
       path: '/network-visualizer',

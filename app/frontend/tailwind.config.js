@@ -14,6 +14,7 @@ module.exports = {
           light: '#D5E4C3',
         },
         'nyanza': '#d5ecd4',
+        'nyanza-darker': '#c4d9c3',
         'ash': '#a1b0ab',
         'rufous': '#a72608',
       },
@@ -26,4 +27,3 @@ module.exports = {
   },
   plugins: [],
 }
-

@@ -1,13 +1,21 @@
 <script setup>
-  import { ref, nextTick } from 'vue';
+  import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
+
   import IPInput from '@c/ui/Input/IPInput.vue';
   import MaskInput from '@c/ui/Input/MaskInput.vue';
   import PrefixInput from '@c/ui/Input/PrefixInput.vue';
   import SubmitButton from '../Button/SubmitButton.vue';
+  import { getUrl } from '@c/logic/api.js';
+
+
+  const router = useRouter();
   const baseAddress = ref()
   const mask = ref()
   const prefixes = ref()
-  const calculated = ref()
+  function save(data) {
+    sessionStorage.setItem('data', data);
+  }
 </script>
 
 <template>
@@ -56,14 +64,8 @@
       :base-address="baseAddress"
       :mask="mask"
       :input="prefixes"
-      @response="(response) => calculated = response"
+      @response="(response) => {router.push({path: `/subnet-calculator/net/${response.id}`});}"
     />
-    <p
-      :class="calculated ? '' : 'hidden'"
-      class="text-smoky h-96"
-      >
-      {{ calculated }}
-    </p>
 
   </main>
 </template>

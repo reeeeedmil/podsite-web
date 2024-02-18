@@ -18,6 +18,9 @@
     "mask": "Maska:",
     "prefix": "Prefixy:",
     "parsedPrefixes": "Zpracované prefixy:"
+  },
+  "calculator": {
+    "created": "Vytvořené sítě"
   }
 
 }

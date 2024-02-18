@@ -17,9 +17,12 @@
   },
   "input": {
     "baseAddress": "Base network address:",
-    "mask": "Mask::",
+    "mask": "Mask:",
     "prefix": "Prefixes:",
     "parsedPrefixes": "Parsed prefixes:"
+  },
+  "calculator": {
+    "created": "Created networks"
   }
 
 }
