@@ -13,6 +13,9 @@
         prefixes.splice(prefixes.indexOf(Math.min(...prefixes)), 1)
       }
     }
+    if (prefixes.length > 100) {
+      prefixes = prefixes.slice(0, 100)
+    }
     return prefixes.sort(function(a, b){return a-b});
   }
 </script>

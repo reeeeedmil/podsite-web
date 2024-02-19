@@ -4,15 +4,15 @@
 
   import IPInput from '@c/ui/Input/IPInput.vue';
   import MaskInput from '@c/ui/Input/MaskInput.vue';
-  import PrefixInput from '@c/ui/Input/PrefixInput.vue';
-  import SubmitButton from '../Button/SubmitButton.vue';
-  import TitleInput from '../Input/TitleInput.vue';
+  import HostInput from '@c/ui/Input/HostInput.vue';
+  import SubmitButton from '@c/ui/Button/SubmitButton.vue';
+  import TitleInput from '@c/ui/Input/TitleInput.vue';
 
 
   const router = useRouter();
   const baseAddress = ref()
   const mask = ref()
-  const prefixes = ref()
+  const hosts = ref()
   const name = ref()
   const error = ref()
   function save(data) {
@@ -65,18 +65,18 @@
     <br>
     <div class="flex md:flex-row flex-col w-full justify-between">
       <p class="text-smoky lg:text-xl truncate">
-        {{ $t('input.prefixes') }}
+        {{ $t('input.hosts') }}
       </p>
-      <PrefixInput
-        @prefixes-change="(changed) => prefixes = changed"
+      <HostInput
+        @hosts-change="(changed) => hosts = changed"
       />
     </div>
 
     <div class="flex md:flex-row flex-col w-full justify-between">
       <p class="text-smoky lg:text-xl truncate">
-        {{ $t('input.parsedPrefixes') }}
+        {{ $t('input.parsedHosts') }}
       </p>
-      <p>{{ prefixes }}</p>
+      <p>{{ hosts }}</p>
     </div>
 
 
@@ -91,10 +91,10 @@
     </div>
     <br>
     <SubmitButton
-      :type="'prefixes'"
+      :type="'hosts'"
       :base-address="baseAddress"
       :mask="mask"
-      :input="prefixes"
+      :input="hosts"
       :name="name"
       @response="(response) => {checkResponse(response)}"
     />

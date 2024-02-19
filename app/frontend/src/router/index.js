@@ -5,6 +5,7 @@ import About from '@p/About/About.vue';
 import Calculator from '@p/Calculator/Calculator.vue';
 import CalculatorPrefixes from '@p/Calculator/CalculatorPrefixes.vue';
 import CalculatorViewResults from '@p/Calculator/CalculatorViewResults.vue';
+import CalculatorHosts from '@p/Calculator/CalculatorHosts.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -19,6 +20,10 @@ const router = createRouter({
     {
       path: '/subnet-calculator/prefixes',
       component: CalculatorPrefixes,
+    },
+    {
+      path: '/subnet-calculator/hosts',
+      component: CalculatorHosts,
     },
     {
       name: 'nets',

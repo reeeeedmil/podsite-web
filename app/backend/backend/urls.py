@@ -25,6 +25,7 @@ router = routers.DefaultRouter()
 
 router.register(r'net', views.NetViewSet, basename='net')
 router.register(r'prefixes', views.PrefixPost, basename='prefix-post')
+router.register(r'hosts', views.HostPost, basename='host-post')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

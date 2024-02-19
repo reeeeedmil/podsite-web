@@ -18,11 +18,17 @@
   "input": {
     "baseAddress": "Base network address:",
     "mask": "Mask:",
-    "prefix": "Prefixes:",
-    "parsedPrefixes": "Parsed prefixes:"
+    "prefixes": "Prefixes:",
+    "hosts": "Hosts:",
+    "parsedPrefixes": "Parsed prefixes:",
+    "parsedHosts": "Parsed hosts:",
+    "name": "Network name (optional):"
   },
   "calculator": {
     "created": "Created networks"
+  },
+  "error": {
+    "invalidName": "Invalid name, it might be taken - please try a different one"
   }
 
 }

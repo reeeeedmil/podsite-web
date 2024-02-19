@@ -16,11 +16,17 @@
   "input": {
     "baseAddress": "Základní adresa sítě:",
     "mask": "Maska:",
-    "prefix": "Prefixy:",
-    "parsedPrefixes": "Zpracované prefixy:"
+    "prefixes": "Prefixy:",
+    "hosts": "Počty hostů:",
+    "parsedPrefixes": "Zpracované prefixy:",
+    "parsedHosts": "Zpracovaní hosté:",
+    "name": "Název sítě (dobrovolné):"
   },
   "calculator": {
     "created": "Vytvořené sítě"
+  },
+  "error": {
+    "invalidName": "Neplatný název, může být už použit - zkus prosím jiný"
   }
 
 }

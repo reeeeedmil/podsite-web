@@ -1,17 +1,30 @@
 <script setup>
   import { ref } from 'vue';
   import { postApi } from "@c/logic/api.js";
+  import slugify from 'slugify'
   const props = defineProps({
     type: String,
     baseAddress: Array,
     mask: Array,
     input: Array,
+    name: String,
   })
-const response = ref()
+  const emit = defineEmits(["response"])
 function createData() {
 let data = new Object;
-  data.baseAddress = props.baseAddress
-  data.mask = props.mask
+  data.baseAddress = props.baseAddress;
+  data.mask = props.mask;
+
+  if (props.name != "" && props.name != undefined && props.name != null) {
+    data.name = slugify(props.name);
+    if (props.name == undefined || props.name == null) {
+      data.name == ""
+    }
+  }
+  else {
+    data.name = props.name
+  }
+
   if (props.type == "prefixes") {
       data.prefixes = props.input
     } else {

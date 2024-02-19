@@ -25,19 +25,53 @@
       {{ $t('calculator.created') }}
     </h2>
         <section
-          class="m-5 flex flex-wrap"
+          class="flex flex-col"
           v-if="calculated"
           >
-        <div
-          v-for="(net, key) in calculated.value.nets"
+          <h3
+            class="text-2xl md:text-3xl text-center text-smoky pb-3">
+            {{ calculated.value.nets[0].name }}
+          </h3>
+            <table class="outline-ash outline-3 outline text-smoky text-lg self-center">
+              <tr class="bg-nyanza-darker outline outline-ash outline-1">
+                <td class="pr-3">Base network</td>
+                <td></td>
+              </tr>
+              <tr class="bg-nyanza outline outline-ash outline-1">
+                <td class="pr-3">Network address</td>
+                <td class="text-end">{{ calculated.value.nets[0].networkAddress }}</td>
+              </tr>
+              <tr class="bg-nyanza-darker outline outline-ash outline-1">
+                <td class="pr-3">Broadcast</td>
+                <td class="text-end">{{ calculated.value.nets[0].broadcast }}</td>
+              </tr>
+              <tr class="bg-nyanza outline outline-ash outline-1">
+                <td class="pr-3">Mask</td>
+                <td class="text-end">{{ calculated.value.nets[0].mask }}</td>
+              </tr>
+              <tr class="bg-nyanza-darker outline outline-ash outline-1">
+                <td class="pr-3">Wildcard</td>
+                <td class="text-end">{{ calculated.value.nets[0].wildcard }}</td>
+              </tr>
+              <tr class="bg-nyanza outline outline-ash outline-1">
+                <td class="pr-3">Prefix</td>
+                <td class="text-end">{{ calculated.value.nets[0].prefix }}</td>
+              </tr>
+            </table>
+        </section>
+        <br>
+
+        <section
+          class="flex flex-wrap justify-center"
+          v-if="calculated"
           >
           <div
-            v-if="key != '0'"
-            class="text-lg p-3 text-smoky"
+            v-for="(net, key) in calculated.value.nets"
             >
-            <table class="outline-ash outline-3 outline">
-              <tr>
-              </tr>
+            <table
+              v-if="key != '0'"
+              class="outline-ash outline-3 outline text-lg m-3 text-smoky"
+              >
               <tr class="bg-nyanza-darker outline outline-ash outline-1">
                 <td class="pr-3">Subnet number</td>
                 <td class="text-end">{{ key }}</td>
@@ -64,8 +98,6 @@
               </tr>
             </table>
           </div>
-
-        </div>
         </section>
   </main>
 </template>
