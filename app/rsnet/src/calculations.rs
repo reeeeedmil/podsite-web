@@ -1,6 +1,6 @@
 use pyo3::prelude::*;
 use std::collections::HashMap;
-use std::{collections::hash_map::DefaultHasher, hash::Hash, hash::Hasher, str::FromStr, num::IntErrorKind};
+use std::{collections::hash_map::DefaultHasher, hash::Hash, hash::Hasher};
 #[pyclass]
 #[derive(Clone, Copy)]
 pub struct Address {
@@ -32,7 +32,7 @@ fourth_byte (type of u8)"#)]
     }
     #[getter]
     pub fn get(&self) -> Address {
-        return *self;
+        *self
     }
     #[pyo3(
         text_signature=
@@ -58,13 +58,13 @@ pub struct Net {
 }
 #[pymethods]
 impl Net {
-    
+
     #[new]
     #[pyo3(
         text_signature=
            r#"Net(network_address, mask)
 
-Net::new creates a new network. 
+Net::new creates a new network.
 Required inputs are
 network_address (needs to be Address type)
 mask (neets to be Address type)"#)]
@@ -148,7 +148,7 @@ pub fn prefix_from_mask(mask: &Address) -> u8 {
         Ok(num) => num,
         Err(error) => {
             println!("{error}");
-            return 0;
+            0
         }
     }
 }
@@ -191,12 +191,12 @@ pub fn mask_from_prefix(prefix: &mut u8) -> Address {
     while address_vec.len() < 4 {
         address_vec.push(0)
     }
-    return Address {
+    Address {
         first_byte: address_vec[0],
         second_byte: address_vec[1],
         third_byte: address_vec[2],
         fourth_byte: address_vec[3],
-    };
+    }
 }
 
 pub fn broadcast(network_address: &Address, mask: &Address) -> Address {
@@ -240,7 +240,7 @@ pub fn normalize_number(input: &mut u32) {
 }
 pub fn hosts_to_mask(hosts: u32) -> Address {
     let mut prefix: u8 = 32 - u8::try_from((format!("{:b}", hosts-1)).len()).unwrap();
-    return mask_from_prefix(&mut prefix);
+    mask_from_prefix(&mut prefix)
 }
 fn next_address(addr: &Address) -> Address {
     let first_byte: (u8, u8);
@@ -279,7 +279,7 @@ pub fn scaffold_hosts(base_network: &Net, mut hosts_vec: Vec<u32>) -> Vec<Net> {
         let net: Net = Net::new(net_address, mask);
         networks.push(net);
     }
-    return networks;
+    networks
 }
 #[pyfunction]
 pub fn scaffold_prefixes(base_network: &Net, mut prefixes_vec: Vec<u8>) -> Vec<Net> {
@@ -295,5 +295,5 @@ pub fn scaffold_prefixes(base_network: &Net, mut prefixes_vec: Vec<u8>) -> Vec<N
         let net: Net = Net::new(net_address, mask);
         networks.push(net);
     }
-    return networks;
+    networks
 }

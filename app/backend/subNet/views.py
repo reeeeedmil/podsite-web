@@ -7,6 +7,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 
 from .serializers import NetSerializer
+from django.utils.text import slugify
 
 import rsnet
 # Create your views here.
@@ -18,7 +19,7 @@ class NetViewSet(viewsets.ViewSet):
             int(pk)
             parent = Net.objects.get(pk=pk)
         except:
-            parent = Net.objects.get(title_slug=pk)
+            parent = Net.objects.get(title_slug=slugify(pk))
         children = Net.objects.filter(parent=parent)
 
         response = {

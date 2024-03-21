@@ -22,10 +22,21 @@
     "hosts": "Hosts:",
     "parsedPrefixes": "Parsed prefixes:",
     "parsedHosts": "Parsed hosts:",
-    "name": "Network name (optional):"
+    "name": "Network name (optional):",
+    "basePrefix": "Base prefix:"
   },
   "calculator": {
-    "created": "Created networks"
+    "created": "Created networks",
+    "table": {
+      "baseNet": "Base network",
+      "subnetNumber": "Subnet number",
+      "netAddress": "Network address",
+      "broadcast": "Broadcast",
+      "mask": "Mask",
+      "wildcard": "Wildcard",
+      "prefix": "Prefix"
+
+    }
   },
   "error": {
     "invalidName": "Invalid name, it might be taken - please try a different one"

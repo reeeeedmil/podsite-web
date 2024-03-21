@@ -20,10 +20,21 @@
     "hosts": "Počty hostů:",
     "parsedPrefixes": "Zpracované prefixy:",
     "parsedHosts": "Zpracovaní hosté:",
-    "name": "Název sítě (dobrovolné):"
+    "name": "Název sítě (dobrovolné):",
+    "basePrefix": "Základní prefix:"
   },
   "calculator": {
-    "created": "Vytvořené sítě"
+    "created": "Vytvořené sítě",
+    "table": {
+      "baseNet": "Základní síť",
+      "subnetNumber": "Index podsítě",
+      "netAddress": "Adresa sítě",
+      "broadcast": "Broadcast",
+      "mask": "Maska",
+      "wildcard": "Wildcard",
+      "prefix": "Prefix"
+
+    }
   },
   "error": {
     "invalidName": "Neplatný název, může být už použit - zkus prosím jiný"

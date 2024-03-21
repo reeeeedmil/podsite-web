@@ -15,9 +15,6 @@
   const prefixes = ref()
   const name = ref()
   const error = ref()
-  function save(data) {
-    sessionStorage.setItem('data', data);
-  }
   function checkResponse(response) {
     if (response.error == "Invalid name") {
       error.value = "Invalid name - try a different one"

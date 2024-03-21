@@ -1,5 +1,4 @@
 <script setup>
-  import { ref } from 'vue';
   import LinkButton from '@c/ui/Button/LinkButton.vue';
 </script>
 

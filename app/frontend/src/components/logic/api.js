@@ -1,6 +1,6 @@
 // API pro prihlasovani registraci a pod
 
-const baseUrl = `http://localhost:8000`
+const baseUrl = `http://127.0.0.1:8000`
 
 export async function api(apiType = '', firstItem, secondItem) {
     let response
