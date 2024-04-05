@@ -19,10 +19,6 @@
       :to="'/network-visualizer'"
       :text="this.$t('buttons.networkVisualizer')"
     />
-    <LinkButton
-      :to="'/about'"
-      :text="this.$t('buttons.about')"
-    />
     <SubnetTextAnimation />
   </main>
 </template>

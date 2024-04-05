@@ -15,10 +15,10 @@ onMounted (() => {
 <template>
   <header class="bg-vanilla-base h-16 w-screen top-0">
     <nav class="hidden md:flex h-full">
-      <div class="h-full bg-coyote w-1/6 flex">
+      <div class="h-full bg-coyote w-1/6 flex subNet-base">
         <router-link
           to="/"
-          class="text-3xl text-smoky  flex justify-center items-center w-full text-center"
+          class="text-3xl text-smoky  flex justify-center items-center w-full text-center subNet-text"
         >
           subNet
         </router-link>
@@ -41,10 +41,10 @@ onMounted (() => {
       <LanguageButton />
     </nav>
     <nav class="flex md:hidden bg-vanilla-base w-full h-full justify-between">
-      <div class="h-full bg-coyote w-1/6 flex">
+      <div class="h-full bg-coyote flex subNet-base">
         <router-link
           to="/"
-          class="text-3xl text-smoky  flex justify-center items-center w-full text-center"
+          class="text-3xl text-smoky  flex justify-center items-center w-full text-center subNet-text"
         >
           subNet
         </router-link>
@@ -115,5 +115,22 @@ onMounted (() => {
     0% {
       opacity: 0;
     }
+}
+
+.subNet-base {
+  background-color: rgb(126, 101, 81);
+  transition: ease 0.3s;
+}
+.subNet-text {
+  color: rgb(9, 12, 2);
+  transition: ease 0.2s;
+}
+.subNet-base:hover {
+  background-color: rgb(213, 228, 195);
+  transition: ease 0.3s;
+}
+.subNet-text:hover {
+  color: rgb(0, 0, 0);
+  transition: ease 0.2s;
 }
 </style>

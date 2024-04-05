@@ -7,5 +7,4 @@
 <template>
   <Header />
     <Body />
-  <Footer />
 </template>
